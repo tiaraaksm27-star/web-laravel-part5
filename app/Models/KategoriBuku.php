@@ -12,4 +12,8 @@ class KategoriBuku extends Model
     protected $table = 'kategori_buku';
     protected $primaryKey = 'id_kategori_buku';
     protected $fillable = ['kategori_buku'];
+
+    public function buku(){
+        return $this->hasMany("App\Models\Buku", "id_kategori_buku");
+    }
 }

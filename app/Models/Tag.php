@@ -11,4 +11,8 @@ class Tag extends Model
     protected $table = 'tag';
     protected $primaryKey = 'id_tag';
     protected $fillable = ['tag'];
+
+    public function buku(){
+        return $this->belongsToMany("App\Models\Buku", "tag_buku", "id_tag", "id_buku");
+    }
 }

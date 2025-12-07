@@ -14,39 +14,45 @@ Penerbit
         <th>No</th>
         <th>Penerbit</th>
         <th>Alamat</th>
+        <th>No Telp</th>
         <th>Aksi Edit</th>
         <th>Aksi Hapus</th>
     </thead>
-    <body>
+    <tbody>
         @if (!empty($PenerbitBuku))
-            @php
-            $i=1
-            @endphp
-            @foreach ($PenerbitBuku as $key => $Penerbit )
+        @php
+        $i=1
+        @endphp
+        @foreach($PenerbitBuku as $key => $Penerbit)
                 <tr>
-                    <td>{{ $key+1 }}</td>
+                    <td>{{ $i }}</td>
                     <td>{{ $Penerbit->penerbit }}</td>
                     <td>{{ $Penerbit->alamat }}</td>
-                    <td><a href="{{url('/penerbit.'.$Penerbit->id_penerbit.'.edit')}}">
-                    <input type="button" value="Edit"/>
-                    </a></td>
-                        <td>
-                    <form action="{{url('/penerbit.'.$Penerbit->id_penerbit)}}" method="Post"
-                    onsubmit="return confirm('Apakah data ingin dihapus?')">
-                    @csrf
-                    <input type="hidden" value="DELETE"name="_method">
-                    <input type="submit" value="Delete" />
-                    </form>
+                    <td>
+                        <a href="{{url('/penerbit.'.$Penerbit->id_penerbit.'.edit')}}">
+                            <input type="button" value="Edit" />
+                        </a>
+                    </td>
+                    <td>
+                        <form action="{{url('/penerbit.'.$Penerbit->id_penerbit)}}"  
+                              method="Post"
+                              onsubmit="return confirm('Apakah data ingin dihapus?')">
+                            @csrf
+                            <input type="hidden" value="DELETE" name="_method">
+                            <input type="submit" value="Delete" />
+                        </form>
                     </td>
                 </tr>
+                @php
+                $i++
+                @endphp
             @endforeach
         @else
-            <p>Tidak ada data penerbit</p>
+            <p>Tidak ada data Penerbit</p>
         @endif
-    </body>
+    </tbody>
 </table>
-@foreach ($JumlahPenerbitBuku as $Jumlah)
-<p><p>Jumlah Data {{$Jumlah->penerbit}}: {{ $Jumlah->jumlah_penerbit}}</p>
-@endforeach
+
+<p>Jumlah Data : {{ $JumlahPenerbitBuku }}</p>
 <a href="{{url('/penerbit.create')}}">Tambah Penerbit</a>
 @endsection
