@@ -6,6 +6,8 @@ use App\Http\Controllers\KategoriBukuController;
 use App\Http\Controllers\PenerbitController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/hai', function () {
     return view('welcome');
@@ -39,3 +41,15 @@ Route::post('/buku', [BukuController::class,'store']);
 Route::get('/buku.{id}.edit', [BukuController::class,'edit']);
 Route::put('/buku.{id}', [BukuController::class,'update']);
 Route::delete('/buku.{id}', [BukuController::class,'destroy']);
+Route::get(' /user', [UserController::class,'index'])->name('user');
+Route::get('/user.create', [UserController::class,'create']);
+Route::post('/user', [UserController::class,'store']);
+Route::get('/user.cari', [UserController::class,'search']);
+Route::get('/user.{id}.edit', [UserController::class,'edit']);
+Route::put('/user.{id}', [UserController::class,'update']);
+Route::get('/user.{id}', [UserController::class,'show']);
+Route::delete('/user.{id}', [UserController::class,'destroy']);
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::middleware('auth')->get('/profil', [AuthController::class,'showProfil'])->name('profil');
